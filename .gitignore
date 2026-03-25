@@ -24,3 +24,4 @@ deployments/
 # Never commit these
 *.cjs
 *.mainnet.clar
+app/.next
