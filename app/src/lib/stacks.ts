@@ -10,7 +10,11 @@ import { DEPLOYER, NETWORK, HIRO_API_KEY, HIRO_API, SBTC_TOKEN } from "./constan
 export { Cl, cvToJSON };
 export type { ClarityValue };
 
-const STACKS_NETWORK = createNetwork({ network: NETWORK, apiKey: HIRO_API_KEY });
+let _network: ReturnType<typeof createNetwork> | null = null;
+function getNetwork() {
+  if (!_network) _network = createNetwork({ url: HIRO_API });
+  return _network;
+}
 
 export async function callReadOnly(
   contractName: string,
@@ -27,7 +31,7 @@ export async function callReadOnly(
     functionName,
     functionArgs: args,
     senderAddress: sender,
-    network: STACKS_NETWORK,
+    network: getNetwork(),
   });
 
   return result;
@@ -47,7 +51,7 @@ export async function callReadOnlyExternal(
     functionName,
     functionArgs: args,
     senderAddress: sender,
-    network: STACKS_NETWORK,
+    network: getNetwork(),
   });
   return result;
 }
