@@ -6,7 +6,9 @@ Live on Stacks mainnet. Real sBTC. Real yield. Every transaction verifiable on-c
 
 ![stacky](app/public/logo.jpg)
 
-[Demo Video](https://www.youtube.com/watch?v=TYzhMTyhnW8) | [Explorer](https://explorer.hiro.so/address/SPCG3TNZXGFP36E4QGQN92TBM3JYF7E4PHGGR120?chain=mainnet)
+[![Demo Video](https://img.youtube.com/vi/TYzhMTyhnW8/maxresdefault.jpg)](https://www.youtube.com/watch?v=TYzhMTyhnW8)
+
+[Watch Demo](https://www.youtube.com/watch?v=TYzhMTyhnW8) | [Explorer](https://explorer.hiro.so/address/SPCG3TNZXGFP36E4QGQN92TBM3JYF7E4PHGGR120?chain=mainnet)
 
 ---
 
