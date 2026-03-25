@@ -12,7 +12,7 @@ export type { ClarityValue };
 
 let _network: ReturnType<typeof createNetwork> | null = null;
 function getNetwork() {
-  if (!_network) _network = createNetwork({ url: HIRO_API });
+  if (!_network) _network = createNetwork({ network: "mainnet" });
   return _network;
 }
 
