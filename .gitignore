@@ -25,3 +25,5 @@ deployments/
 *.cjs
 *.mainnet.clar
 app/.next
+
+.vercel
