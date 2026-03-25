@@ -1,0 +1,143 @@
+[project]
+name = 'stacky'
+description = 'sBTC DeFi — Prediction Markets & Yield Strategies'
+authors = []
+telemetry = true
+cache_dir = '.\.cache'
+
+# --- External dependencies ---
+
+[[project.requirements]]
+contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
+
+[[project.requirements]]
+contract_id = 'SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.ft-trait'
+
+[[project.requirements]]
+contract_id = 'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token'
+
+[[project.requirements]]
+contract_id = 'SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.sip-010-trait-ft-standard-v-1-1'
+
+[[project.requirements]]
+contract_id = 'SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.stableswap-pool-trait-v-1-4'
+
+[[project.requirements]]
+contract_id = 'SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.redeemeable-trait-v1-2'
+
+[[project.requirements]]
+contract_id = 'SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.ft-trait'
+
+[[project.requirements]]
+contract_id = 'SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.incentives-trait-v2-1'
+
+[[project.requirements]]
+contract_id = 'SP1A27KFY4XERQCCRCARCYD1CC5N7M6688BSYADJ7.v0-4-market'
+
+[[project.requirements]]
+contract_id = 'SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.stableswap-swap-helper-v-1-4'
+
+[[project.requirements]]
+contract_id = 'SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.borrow-helper-v2-1-7'
+
+[[project.requirements]]
+contract_id = 'SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.pool-0-reserve'
+
+[[project.requirements]]
+contract_id = 'SP1S1HSFH0SQQGWKB69EYFNY0B1MHRMGXR3J1FH4D.vault-hbtc-v1-1'
+
+[[project.requirements]]
+contract_id = 'SM1793C4R5PZ4NS4VQ4WMP7SKKYVH8JZEWSZ9HCCR.stableswap-pool-trait-v-1-1'
+
+# --- Mock token (testing only) ---
+
+[contracts.sbtc-token]
+path = 'contracts/mock/sbtc-token.clar'
+clarity_version = 3
+epoch = 'latest'
+
+# --- Prediction market contracts ---
+
+[contracts.stacky-math]
+path = 'contracts/prediction/stacky-math.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.stacky-governance-v2]
+path = 'contracts/prediction/stacky-governance-v2.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-math']
+
+[contracts.stacky-oracle-v3]
+path = 'contracts/prediction/stacky-oracle-v3.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-governance-v2']
+
+[contracts.stacky-outcome-tokens-v3]
+path = 'contracts/prediction/stacky-outcome-tokens-v3.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-governance-v2', 'stacky-oracle-v3', 'sbtc-token']
+
+[contracts.stacky-exchange-v6]
+path = 'contracts/prediction/stacky-exchange-v6.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-outcome-tokens-v3', 'stacky-math', 'stacky-governance-v2', 'sbtc-token']
+
+# --- Yield strategy contracts ---
+
+[contracts.stacky-governance]
+path = 'contracts/yield/stacky-governance.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-math']
+
+[contracts.token-scbtc]
+path = 'contracts/yield/token-scbtc.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-governance']
+
+[contracts.token-sbbtc]
+path = 'contracts/yield/token-sbbtc.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-governance']
+
+[contracts.token-sabtc]
+path = 'contracts/yield/token-sabtc.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-governance']
+
+[contracts.stacky-aggregator]
+path = 'contracts/yield/stacky-aggregator.clar'
+clarity_version = 3
+epoch = 'latest'
+depends_on = ['stacky-governance', 'token-scbtc', 'token-sbbtc', 'token-sabtc']
+
+# --- Analysis settings ---
+
+[repl.analysis]
+passes = ['check_checker']
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
+
+[repl.remote_data]
+enabled = true
+api_url = 'https://api.hiro.so'
+
+clarity_version = 3
+epoch = "latest"
+depends_on = ["stacky-governance"]
+
+clarity_version = 3
+epoch = "latest"
+depends_on = ["stacky-governance"]

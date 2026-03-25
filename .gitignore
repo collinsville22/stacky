@@ -1,0 +1,26 @@
+**/settings/Mainnet.toml
+**/settings/Testnet.toml
+.cache/**
+history.txt
+
+logs
+*.log
+npm-debug.log*
+coverage
+*.info
+costs-reports.json
+node_modules
+.env
+.env.local
+.env*.local
+
+# Engine state (large, regenerated)
+data/engine-state.json
+
+# Build artifacts
+app/.next
+deployments/
+
+# Never commit these
+*.cjs
+*.mainnet.clar
